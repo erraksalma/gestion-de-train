@@ -192,7 +192,7 @@ const trajets = [
         availableSeats: 50
     }
 ];
-function Afficher_trajets() {
+function Afficher_trajets(){
     console.log("=== TRAJETS DISPONIBLES ===");
     for (let i = 0; i < trajets.length; i++) {
         console.log( "#" + trajets[i].id + " " +trajets[i].departure + " → " +trajets[i].destination);
@@ -214,7 +214,7 @@ function Acheter_ticket() {
             break;
         }
     }
-    if(trajet === 0) {
+    if(trajet === 0){
         console.log("Trajet introuvable.");
         return;
     }if(trajet.availableSeats <= 0) {
@@ -230,7 +230,6 @@ function Acheter_ticket() {
         prix: trajet.price
     };
     prochainIdTicket++;
-    
     tickets.push(ticket);
     console.log("Ticket acheté avec succès.");
     console.log("Ticket #" + ticket.id);
@@ -239,18 +238,28 @@ function Acheter_ticket() {
     console.log("Place : " + ticket.place);
     console.log("Prix : " + ticket.prix + " DH");
 }
-function Affichrer_tickets(){
+function Afficher_tickets() {
     console.log("======Tickets======");
-    if(tickets.length===0){
+     if (tickets.length === 0) {
         console.log("Aucun ticket enregistré");
-        return;
     }
-    for(i=0;i<tickets.length;i++){
-       let ticket=tickets[i];
-
-
+    for (let i = 0; i < tickets.length; i++) {
+        let ticket = tickets[i];
+        
+        let trajet = 0;
+        for (let j = 0; j < trajets.length; j++) {
+            if (trajets[j].id === ticket.trajetId) {
+                console.log("Ticket #" + ticket.id);
+        console.log("Passager : " + ticket.passager);
+        console.log("Trajet : " + trajets[j].departure + " => " + trajets[j].destination);
+        console.log("Place : " + ticket.place);
+        console.log("Prix : " + ticket.prix);
+            }
+        
+        }
     }
 }
+
 let choix;
 do {
     menu();
@@ -263,19 +272,19 @@ do {
             Acheter_ticket();
             break;
         case 3:
-            console.log("Afficher les tickets");
+            Afficher_tickets();
             break;
         case 4:
-            console.log("Annuler un ticket");
+            Annuler_un_ticket();
             break;
         case 5:
-            console.log("Rechercher un ticket");
+            Rechercher_un_ticket();
             break;
         case 6:
-            console.log("Filtrer les trajets");
+            Filtrer_les_trajets();
             break;
         case 7:
-            console.log("Trier les trajets");
+            Trier_les_trajets();
             break;
         case 0:
             console.log("Au revoir !");
