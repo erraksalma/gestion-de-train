@@ -261,18 +261,23 @@ function afficherTickets() {
         }
     }
 }
-
-function anulerTicket(){
-    let search=Number(prompt("Entrer l'identifiant du ticket:"));
-    for(let i=0;i<tickets.length;i++){
-        if(tickets[i].id==search){
-             tickets.splice(i,1);
-             tickets[i].place--;
-             console.log("Ticket annulé avec succès");
-        }else {
-            console.log("ticket introuvable");
+function anulerTicket() {
+    let search = Number(prompt("Entrer l'identifiant du ticket:"));
+    for (let i = 0; i < tickets.length; i++) {
+        if (tickets[i].id == search) {
+            for (let j = 0; j < trajets.length; j++) {
+                if (trajets[j].id == tickets[i].trajetId) {
+                    trajets[j].availableSeats++;
+                    break;
+                }
+            }
+            tickets.splice(i, 1);
+            tickets[i].place--;
+            console.log("Ticket annulé avec succès");
+            return;
         }
     }
+    console.log("Ticket introuvable");
 }
 function rechercherTicket(){
     let search=prompt("Entrer le nom de passager:");
@@ -308,6 +313,9 @@ function filtrerTrajets(){
     }
     
 }
+function trierTrajets(){
+
+}
 let choix;
 do {
     menu();
@@ -332,7 +340,7 @@ do {
             filtrerTrajets();
             break;
         case 7:
-            Trier_les_trajets();
+            trierTrajets();
             break;
         case 0:
             console.log("Au revoir !");
