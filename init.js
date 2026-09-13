@@ -8,6 +8,7 @@ function menu() {
     console.log("5. Rechercher un ticket");
     console.log("6. Filtrer les trajets");
     console.log("7. Trier les trajets");
+    console.log("8. Statistiques");
     console.log("0. Quitter");
 }
 const tickets = [];
@@ -330,7 +331,11 @@ function trierTrajets() {
        console.log(trajets[k].departure+"  "+"=>"+"  " +trajets[k].destination+":"+"  "+trajets[k].price+"DH");
     }
 }
-
+function statistiques(){
+    console.log("=====statistiques===");
+    console.log("n0mbre total de ticket vendus : "+ tickets.length);
+    
+}
 let choix;
 do {
     menu();
@@ -356,6 +361,9 @@ do {
             break;
         case 7:
             trierTrajets();
+            break;
+        case 8:
+            statistiques();
             break;
         case 0:
             console.log("Au revoir !");
