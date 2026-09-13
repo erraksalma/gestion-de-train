@@ -264,7 +264,7 @@ function anulerTicket() {
     let search = Number(prompt("Entrer l'identifiant du ticket:"));
     for (let i = 0; i < tickets.length; i++) {
         if (tickets[i].id == search) {
-            let placeAnnulee= tickets[i].place;
+            let placeAnnulee = tickets[i].place;
             let trajetId = tickets[i].trajetId;
             for (let j = 0; j < trajets.length; j++) {
                 if (trajets[j].id == tickets[i].trajetId) {
@@ -273,11 +273,11 @@ function anulerTicket() {
                 }
             }
             tickets.splice(i, 1);
-            for(let k=0;k<tickets.length;k++){
-                if(tickets[k].trajetId==trajetId && tickets[k].place>placeAnnulee){
+            for (let k = 0; k < tickets.length; k++) {
+                if (tickets[k].trajetId == trajetId && tickets[k].place > placeAnnulee) {
                     tickets[k].place--;
                 }
-                
+
             }
             console.log("Ticket annulé avec succès");
             return;
@@ -311,42 +311,59 @@ function rechercherTicket() {
 function filtrerTrajets() {
     let search = prompt("enter la ville de depart");
     let newT = trajets.filter(trajet => trajet.departure == search);
-    if(newT.length==0){
+    if (newT.length == 0) {
         console.log("trajet introuvvable");
-    }else{
-           for (let i = 0; i < newT.length; i++) {
-        console.log(newT[i].departure + " => " + newT[i].destination + " : " + newT[i].price + " DH");
+    } else {
+        for (let i = 0; i < newT.length; i++) {
+            console.log(newT[i].departure + " => " + newT[i].destination + " : " + newT[i].price + " DH");
+        }
     }
-    }
-    
+
 }
 function trierTrajets() {
     let swap;
     for (let i = 1; i < trajets.length; i++) {
         swap = false;
-        for (let j = 0; j < trajets.length-i; j++) {
-            if (trajets[j].price > trajets[j+1].price) {
-                [trajets[j], trajets[j+1]] = [trajets[j+1], trajets[j]];
+        for (let j = 0; j < trajets.length - i; j++) {
+            if (trajets[j].price > trajets[j + 1].price) {
+                [trajets[j], trajets[j + 1]] = [trajets[j + 1], trajets[j]];
                 swap = true;
             }
         } if (!swap) {
             break;
         }
     }
-     console.log("========================");
-    for(let k=0;k<trajets.length;k++){
-       console.log(trajets[k].departure+"  "+"=>"+"  " +trajets[k].destination+":"+"  "+trajets[k].price+"DH");
+    console.log("========================");
+    for (let k = 0; k < trajets.length; k++) {
+        console.log(trajets[k].departure + "  " + "=>" + "  " + trajets[k].destination + ":" + "  " + trajets[k].price + "DH");
     }
 }
-function statistiques(){
+function statistiques() {
     console.log("=====statistiques===");
-    console.log("n0mbre total de ticket vendus : "+ tickets.length);
-     
-    let somme=0;
-    for(let i=0;i<tickets.length;i++){
-        somme+=tickets[i].prix;
-    }console.log("le chiffre d'affaire est  :"+somme+ "dh");
-    
+    console.log("n0mbre total de ticket vendus : " + tickets.length);
+    console.log("===============");
+    let somme = 0;
+    for (let i = 0; i < tickets.length; i++) {
+        somme += tickets[i].prix;
+    } console.log("le chiffre d'affaire est  :" + somme + "dh");
+    console.log("===============");
+    let max = 0;
+    let trajetIdplusvendu = 0;
+    for (let i = 0; i < trajets.length; i++) {
+        let compteur = 0;
+        for (let j = 0; j < tickets.length; j++) {
+            if (trajets[i].id == tickets[j].trajetId)
+                compteur++;
+            if (max < compteur) {
+                max = compteur;
+                trajetIdplusvendu = trajets[i];
+            }
+        }
+    }
+    console.log("le trajet le plus vendu est : " + "  " + trajetIdplusvendu.departure + "=>" + "  " + trajetIdplusvendu.destination);
+    console.log(max + "  " + "tickets vendu");
+
+
 }
 let choix;
 do {
