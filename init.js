@@ -334,6 +334,11 @@ function trierTrajets() {
 function statistiques(){
     console.log("=====statistiques===");
     console.log("n0mbre total de ticket vendus : "+ tickets.length);
+     
+    let somme=0;
+    for(let i=0;i<tickets.length;i++){
+        somme+=tickets[i].prix;
+    }console.log("le chiffre d'affaire est  :"+somme+ "dh");
     
 }
 let choix;
