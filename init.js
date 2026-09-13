@@ -264,6 +264,8 @@ function anulerTicket() {
     let search = Number(prompt("Entrer l'identifiant du ticket:"));
     for (let i = 0; i < tickets.length; i++) {
         if (tickets[i].id == search) {
+            let placeAnnulee= tickets[i].place;
+            let trajetId = tickets[i].trajetId;
             for (let j = 0; j < trajets.length; j++) {
                 if (trajets[j].id == tickets[i].trajetId) {
                     trajets[j].availableSeats++;
@@ -271,7 +273,12 @@ function anulerTicket() {
                 }
             }
             tickets.splice(i, 1);
-            tickets[i].place--;
+            for(let k=0;k<tickets.length;k++){
+                if(tickets[k].trajetId==trajetId && tickets[k].place>placeAnnulee){
+                    tickets[k].place--;
+                }
+                
+            }
             console.log("Ticket annulé avec succès");
             return;
         }
