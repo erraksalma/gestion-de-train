@@ -287,10 +287,11 @@ function anulerTicket() {
 }
 function rechercherTicket() {
     let search = prompt("Entrer le nom de passager:");
+    search=search.toLowerCase();
     let trouve = 0;
 
     for (let i = 0; i < tickets.length; i++) {
-        if (tickets[i].passager == search) {
+        if (tickets[i].passager.toLowerCase() == search) {
             trouve = 1;
             for (let j = 0; j < trajets.length; j++) {
                 if (trajets[j].id == tickets[i].trajetId) {
@@ -310,7 +311,8 @@ function rechercherTicket() {
 }
 function filtrerTrajets() {
     let search = prompt("enter la ville de depart");
-    let newT = trajets.filter(trajet => trajet.departure == search);
+    search=search.toLowerCase();
+    let newT = trajets.filter(trajet => trajet.departure.toLowerCase() == search);
     if (newT.length == 0) {
         console.log("trajet introuvvable");
     } else {
